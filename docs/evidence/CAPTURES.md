@@ -1,17 +1,21 @@
-# FindChain frontend evidence
+# Evidence capture status
+
+Audit date: 2026-11-23.
 
 ## Captured
 
-- [x] **Frontend home/dashboard:** [frontend-home.png](frontend-home.png). Real browser screenshot captured on 2026-11-23. The application shell loaded and Phantom displayed the connected wallet `GUAF...K368`; the public report counter showed zero records at capture time.
-- [x] **Diagnostic state preserved:** the screenshot visibly records a rejected transaction with the message `This account may not be used to pay transaction fees`. This is evidence of the current UI state and a debugging lead, not evidence of a successful transaction.
+- [x] [Frontend dashboard](frontend-home.png): genuine browser capture from 2026-11-23. It shows the wallet adapter displaying a connected, abbreviated public address and one report in the dashboard. The image does not show a transaction result; it is not proof that an instruction succeeded.
+- [x] Devnet deployment and lifecycle transaction status: independently checked by RPC; see [devnet.md](devnet.md).
 
-## Still to capture
+## Still to capture manually
 
-1. Report form before signing and Phantom approval prompt (hide unrelated wallet details).
-2. Public item listing after a successful, confirmed creation, with its Explorer account link.
-3. Claim transaction and resulting `CLAIMED` state.
-4. Finder's return confirmation and `RETURNED` state.
-5. Closed PDA no longer returned by the app/RPC, plus the close transaction in Explorer.
-6. Terminal output for the actual local test command and Devnet signatures.
+1. Report form and Phantom transaction approval prompt. Keep unrelated wallet details out of view.
+2. Public listing following a newly confirmed create transaction.
+3. Claim from a second wallet and the resulting `CLAIMED` UI state.
+4. Finder's return confirmation and the `RETURNED` UI state.
+5. Closed PDA absent from RPC and the close signature in Explorer.
+6. Terminal output from a successful fresh localnet Anchor test run.
 
-Capture these directly from a real local or deployed app session connected to Devnet. Do not edit screenshots to imply success, and do not include wallet recovery phrases, private keys, or personal data. A connected-wallet indicator alone does not prove that an on-chain instruction succeeded.
+Run `npm --prefix app run dev`, open `http://localhost:3000`, and connect Phantom configured for Devnet. Use only test item text and general locations. Do not share a recovery phrase, secret key, personal contact information, or unrelated wallet details. Save screenshots unaltered in this folder. A connected wallet display is not evidence that an on-chain instruction succeeded.
+
+The browser-control host was unavailable during this audit, and the current Anchor test command exits before tests run because WSL launches Windows Node without `ANCHOR_PROVIDER_URL`; details are in [test-results.md](test-results.md). No Phantom transaction was initiated during this audit.

@@ -10,7 +10,7 @@ Production URL: [https://findchain-web.vercel.app](https://findchain-web.vercel.
 
 ![FindChain frontend home on Solana Devnet](docs/evidence/frontend-home.png)
 
-*Real browser capture from 2026-11-23. The interface loaded and Phantom was connected. The screenshot also preserves a rejected transaction message ("This account may not be used to pay transaction fees") as diagnostic evidence; it is not presented as a successful transaction.*
+*Real browser capture from 2026-11-23. The dashboard shows the wallet adapter's connected state and one report. The image does not show a transaction result and is not evidence of a successful signature.*
 
 ## WayLearn Advanced — Requirements Mapping
 
@@ -35,7 +35,7 @@ Official route: **Proyecto propio**. The official requirements ask for a functio
 - Next.js 15, React 19, Tailwind CSS 4, Phantom Wallet Adapter.
 - Rust tests and TypeScript lifecycle tests; no application database or backend.
 
-Versions used for the verified build: Solana CLI 3.1.10, Anchor CLI 1.1.2, Anchor Lang 1.2.2, SBF platform-tools 1.52 (Rust 1.89 toolchain), host Rust 1.100.0, Node.js 26.13.1, npm 11.20.0, Next.js 15.5.29, React 19.3.1, Anchor JS 0.31.1. Lockfiles pin the installed JavaScript dependency graph.
+Versions checked during the final audit: Solana CLI 3.1.10, Anchor CLI and Anchor Lang 1.1.2, SBF platform-tools 1.52 (Rust 1.89 toolchain), Windows Node.js 24.15.0, npm 12.2.1, Next.js 15.5.29, React 19.3.1, and Anchor JS 0.31.1. Lockfiles pin the JavaScript dependency graph.
 
 ```mermaid
 flowchart LR
@@ -120,8 +120,9 @@ For integration checks against the already deployed program, run `anchor test --
 
 ## Evidence
 
-- [Frontend home screenshot](docs/evidence/frontend-home.png). The screenshot records the real interface and a visible fee-payer error; see the caption above.
+- [Frontend home screenshot](docs/evidence/frontend-home.png). The screenshot records the real interface and wallet-adapter display; it does not show a transaction result.
 - `docs/evidence/devnet.md` records confirmed Devnet signatures.
 - `docs/evidence/CAPTURES.md` tracks captured and pending UI evidence.
+- [WayLearn evaluator package and requirement statuses](docs/WAYLEARN_FINAL_SUBMISSION.md).
 
 The dependency audit and remaining moderate upstream advisories are recorded in `docs/evidence/security-audit.md`.
