@@ -6,6 +6,12 @@ FindChain is a Solana lost-and-found dApp. Finders register found items, viewers
 
 Production URL: [https://findchain-web.vercel.app](https://findchain-web.vercel.app). The site is hosted on Vercel and connects to Solana Devnet by default.
 
+## Frontend preview
+
+![FindChain frontend home on Solana Devnet](docs/evidence/frontend-home.png)
+
+*Real browser capture from 2026-11-23. The interface loaded and Phantom was connected. The screenshot also preserves a rejected transaction message ("This account may not be used to pay transaction fees") as diagnostic evidence; it is not presented as a successful transaction.*
+
 ## WayLearn Advanced — Requirements Mapping
 
 Official route: **Proyecto propio**. The official requirements ask for a functional program, related accounts and PDAs, an IDL-aligned client, wallet frontend, account create/read/update, authority checks, a Rust-enforced conditional close, signature/confirmation/error handling, Devnet evidence, and reproducible documentation.
@@ -114,6 +120,8 @@ For integration checks against the already deployed program, run `anchor test --
 
 ## Evidence
 
-`docs/evidence/devnet.md` records confirmed Devnet signatures. `docs/evidence/CAPTURES.md` lists screenshots to capture from a real local UI session; no screenshots are fabricated.
+- [Frontend home screenshot](docs/evidence/frontend-home.png). The screenshot records the real interface and a visible fee-payer error; see the caption above.
+- `docs/evidence/devnet.md` records confirmed Devnet signatures.
+- `docs/evidence/CAPTURES.md` tracks captured and pending UI evidence.
 
 The dependency audit and remaining moderate upstream advisories are recorded in `docs/evidence/security-audit.md`.
