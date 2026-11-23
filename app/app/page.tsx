@@ -1,6 +1,7 @@
 "use client";
 
-import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import type { FormEvent } from "react";
 import { AnchorProvider, BN, Idl, Program } from "@coral-xyz/anchor";
 import { Connection, PublicKey, SystemProgram, clusterApiUrl } from "@solana/web3.js";
 import {
@@ -129,13 +130,13 @@ function Shell() {
   }, [refresh]);
 
   const transact = useCallback(
-    async (action: () => Promise<string>, successMessage: string) => {
+    async (action: () => Promise<string>, successMessage: string): Promise<boolean> => {
       if (!wallet.publicKey || !anchorWallet) {
         setFeedback({
           kind: "error",
           message: "Conecta Phantom para firmar esta operación.",
         });
-        return;
+        return false;
       }
 
       setBusy(true);
@@ -144,8 +145,10 @@ function Shell() {
         const signature = await action();
         await refresh();
         setFeedback({ kind: "success", message: successMessage, signature });
+        return true;
       } catch (error) {
         setFeedback({ kind: "error", message: explainError(error) });
+        return false;
       } finally {
         setBusy(false);
       }
@@ -187,7 +190,7 @@ function Shell() {
       PROGRAM_ID,
     );
 
-    await transact(
+    const created = await transact(
       () =>
         program.methods
           .createItem(itemId, title, description, location)
@@ -200,7 +203,7 @@ function Shell() {
       "Reporte publicado en Solana Devnet.",
     );
 
-    setForm(EMPTY_FORM);
+    if (created) setForm(EMPTY_FORM);
   };
 
   const requestReturn = (entry: Entry) => {
@@ -283,7 +286,7 @@ function Shell() {
       return;
     }
 
-    await transact(
+    const updated = await transact(
       () =>
         program.methods
           .updateItem(editing.account.itemId, title, description, location)
@@ -294,7 +297,7 @@ function Shell() {
           .rpc(),
       "Reporte actualizado.",
     );
-    setEditing(null);
+    if (updated) setEditing(null);
   };
 
   const walletAddress = wallet.publicKey?.toBase58();
