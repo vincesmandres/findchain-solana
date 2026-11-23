@@ -1,0 +1,438 @@
+{
+  "address": "69WsUdhb9Xnqc8Wacit3TDEpoFekvh9qDLpgidv7Rmo3",
+  "metadata": {
+    "name": "findchain",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "On-chain lost-and-found item registry with claims and authority-checked closure"
+  },
+  "instructions": [
+    {
+      "name": "claim_item",
+      "discriminator": [
+        32,
+        225,
+        122,
+        28,
+        30,
+        103,
+        205,
+        80
+      ],
+      "accounts": [
+        {
+          "name": "claimant",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "item",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "item.authority",
+                "account": "Item"
+              },
+              {
+                "kind": "arg",
+                "path": "item_id"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "_item_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "close_item",
+      "discriminator": [
+        232,
+        80,
+        56,
+        56,
+        194,
+        171,
+        176,
+        235
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "item"
+          ]
+        },
+        {
+          "name": "item",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "arg",
+                "path": "item_id"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "_item_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "create_item",
+      "discriminator": [
+        176,
+        125,
+        142,
+        227,
+        8,
+        231,
+        222,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "item",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "arg",
+                "path": "item_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "item_id",
+          "type": "u64"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "location",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "mark_returned",
+      "discriminator": [
+        119,
+        109,
+        138,
+        54,
+        42,
+        18,
+        68,
+        238
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "item"
+          ]
+        },
+        {
+          "name": "item",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "arg",
+                "path": "item_id"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "_item_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "update_item",
+      "discriminator": [
+        28,
+        222,
+        44,
+        175,
+        216,
+        228,
+        171,
+        184
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "signer": true,
+          "relations": [
+            "item"
+          ]
+        },
+        {
+          "name": "item",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  105,
+                  116,
+                  101,
+                  109
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "authority"
+              },
+              {
+                "kind": "arg",
+                "path": "item_id"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "_item_id",
+          "type": "u64"
+        },
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "name": "location",
+          "type": "string"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Item",
+      "discriminator": [
+        92,
+        157,
+        163,
+        130,
+        72,
+        254,
+        86,
+        216
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidTitle",
+      "msg": "Title is empty or exceeds 64 bytes"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidDescription",
+      "msg": "Description is empty or exceeds 280 bytes"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidLocation",
+      "msg": "Location is empty or exceeds 100 bytes; use a general location"
+    },
+    {
+      "code": 6003,
+      "name": "ItemNotEditable",
+      "msg": "Item is no longer editable"
+    },
+    {
+      "code": 6004,
+      "name": "ItemNotClaimable",
+      "msg": "Item cannot be claimed in its current state"
+    },
+    {
+      "code": 6005,
+      "name": "SelfClaim",
+      "msg": "The finder cannot claim their own item"
+    },
+    {
+      "code": 6006,
+      "name": "AlreadyClaimed",
+      "msg": "Item has already been claimed"
+    },
+    {
+      "code": 6007,
+      "name": "ItemNotClaimed",
+      "msg": "Item must be claimed before it can be returned"
+    },
+    {
+      "code": 6008,
+      "name": "MissingClaimant",
+      "msg": "A claimant must be recorded before return"
+    },
+    {
+      "code": 6009,
+      "name": "ItemNotReturned",
+      "msg": "Only returned items can be closed"
+    }
+  ],
+  "types": [
+    {
+      "name": "Item",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "pubkey"
+          },
+          {
+            "name": "item_id",
+            "type": "u64"
+          },
+          {
+            "name": "title",
+            "type": "string"
+          },
+          {
+            "name": "description",
+            "type": "string"
+          },
+          {
+            "name": "location",
+            "type": "string"
+          },
+          {
+            "name": "claimant",
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "status",
+            "type": {
+              "defined": {
+                "name": "ItemStatus"
+              }
+            }
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ItemStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Found"
+          },
+          {
+            "name": "Claimed"
+          },
+          {
+            "name": "Returned"
+          }
+        ]
+      }
+    }
+  ]
+}
