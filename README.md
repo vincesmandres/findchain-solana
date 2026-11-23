@@ -2,6 +2,10 @@
 
 FindChain is a Solana lost-and-found dApp. Finders register found items, viewers browse public on-chain records, claimants claim items, and finders mark a claimed item returned before closing its account.
 
+## Live application
+
+Production URL: [https://findchain-web.vercel.app](https://findchain-web.vercel.app). The site is hosted on Vercel and connects to Solana Devnet by default.
+
 ## WayLearn Advanced — Requirements Mapping
 
 Official route: **Proyecto propio**. The official requirements ask for a functional program, related accounts and PDAs, an IDL-aligned client, wallet frontend, account create/read/update, authority checks, a Rust-enforced conditional close, signature/confirmation/error handling, Devnet evidence, and reproducible documentation.
